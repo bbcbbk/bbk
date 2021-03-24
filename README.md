@@ -38,14 +38,13 @@ addEventListener(
     
         let nd = new Date();
         if (nd.getDate()%2) {
-            host = SingleDay
+            hostha = SingleDay
         } else {
-            host = DoubleDay
+            hostha = DoubleDay
         }
         
         let url=new URL(event.request.url);
-        url.hostname="yourAppName.herokuapp.com";
-        url.pathname="/$ID-vless";
+        url.hostname= hostha;
         let request=new Request(url,event.request);
         event. respondWith(
             fetch(request)
