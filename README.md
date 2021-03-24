@@ -12,7 +12,7 @@ Deploy VLESS server to heroku
 | `AllowInsecure` | false |
 | `Port` | 443 |
 | `Host` | yourAppName.herokuapp.com </br> Cloudflare Reverse Proxy Domain Name |
-| `Path` | /$ID-vless |
+| `Path` | /wo18cm?ed=2048 |
 | `id` | Generate using UUID generator |
 | `Flow` | Websocket do Not support xtls
 | `encryption` | none |
