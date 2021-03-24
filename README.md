@@ -44,7 +44,7 @@ addEventListener(
         }
         
         let url=new URL(event.request.url);
-        url.hostname="yourAppName.herokuapp.com";
+        url.hostname= host;
         url.pathname="/$ID-vless";
         let request=new Request(url,event.request);
         event. respondWith(
