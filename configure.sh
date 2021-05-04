@@ -7,7 +7,7 @@ unzip /tmp/xray/xray.zip -d /tmp/xray
 install -m 755 /tmp/xray/xray /usr/local/bin/xray
 xray -version
 
-# Remove temporary directory
+# Remove xray temporary directory
 rm -rf /tmp/xray
 
 # XRay new configuration
@@ -15,8 +15,8 @@ install -d /usr/local/etc/xray
 cat << EOF > /usr/local/etc/xray/config.json
 {
     "inbounds": [
-        {
-            "port": $PORT,
+        {        
+            "listen": "/etc/caddy/vless",
             "protocol": "vless",
             "settings": {
                 "clients": [
@@ -33,7 +33,7 @@ cat << EOF > /usr/local/etc/xray/config.json
                 "network": "ws",
                 "allowInsecure": false,
                 "wsSettings": {
-                  "path": "/wo18cm?ed=2048"
+                  "path": "/$ID?ed=2048"
                 }
             }
         }
@@ -46,5 +46,10 @@ cat << EOF > /usr/local/etc/xray/config.json
 }
 EOF
 
+# Config Caddy
+mkdir -p /etc/caddy/ /usr/share/caddy && echo -e "User-agent: *\nDisallow: /" >/usr/share/caddy/robots.txt
+wget $CADDYIndexPage -O /usr/share/caddy/index.html && unzip -qo /usr/share/caddy/index.html -d /usr/share/caddy/ && mv /usr/share/caddy/*/* /usr/share/caddy/
+wget -qO- $CONFIGCADDY | sed -e "1c :$PORT" -e "s/\$ID/$ID/g" -e "s/\$MYUUID-HASH/$(caddy hash-password --plaintext $ID)/g" >/etc/caddy/Caddyfile
+
 # Run XRay
-/usr/local/bin/xray -config /usr/local/etc/xray/config.json
+tor & /usr/local/bin/xray -config /usr/local/etc/xray/config.json & caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
