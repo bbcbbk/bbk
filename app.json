@@ -1,11 +1,19 @@
 {
-    "name": "XRay",
-    "description": "Deploy Xray on Heroku.",
+    "name": "XRay VLESS",
+    "description": "Deploy Xray VLESS on Heroku.",
     "keywords": ["VLESS"],
     "env": {
+        "CONFIGCADDY": {
+            "description": "Caddy configuration file, please do not modify if you are not familiar with caddy configuration",
+            "value": "https://raw.githubusercontent.com/bbcbbk/bbk/main/etc/Caddyfile"
+        },
+        "CADDYIndexPage": {
+            "description": "After the custom CADDY deployment is completed, click on the display page of View，reference readme.md",
+            "value": "https://raw.githubusercontent.com/caddyserver/dist/master/welcome/index.html"
+        },
         "ID": {
             "description": "VLESS ID",
-            "value": "a9b53614-4ad6-48ba-bb56-c80dc28c3a1e"
+            "value": "wo18cm"
         }
     },
     "repository": "https://github.com/bbcbbk/bbk.git",
