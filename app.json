@@ -13,7 +13,7 @@
         },
         "ID": {
             "description": "VLESS ID",
-            "value": "wo18cm"
+            "value": "yourid"
         }
     },
     "repository": "https://github.com/bbcbbk/bbk.git",
